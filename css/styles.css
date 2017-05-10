@@ -20,6 +20,8 @@ header h1 {
   font-size: 18px;
   letter-spacing: 3px;
   color: #BBB;
+  position: relative;
+  top: -30px;
 }
 
 #root {
@@ -27,7 +29,7 @@ header h1 {
   height: 600px;
 }
 
-#progress, #limit, #persona {
+#rim, #limit, #persona {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -35,14 +37,9 @@ header h1 {
   margin-top: -300px;
 }
 
-#progress {
+#rim {
   margin-left: -400px;
   margin-top: -400px;
-}
-
-#limit {
-  display: block;
-  opacity: 0.7;
 }
 
 #line1, #line2, #line3, #line4, #line5 {
@@ -60,7 +57,6 @@ header h1 {
   margin-left: -400px;
   top: 50%;
   margin-top: -400px;
-  opacity: 0.9;
 }
 
 #persona {

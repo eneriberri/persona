@@ -5,25 +5,19 @@ sideNumb = 5,
 rotation = 60, // in radians
 limit = document.getElementById("limit").getContext("2d");
 
-// uncomment to enter rotation in degrees.
-// rotation *= Math.PI/180;
 
-var xCenter = width/2,
-yCenter = height/2,
-coordinates = [];
+var xCenter = width/2, yCenter = height/2;
 
 
+
+//
+// Draw Lines
+//
 var line1 = document.getElementById("line1").getContext("2d");
 var line2 = document.getElementById("line2").getContext("2d");
 var line3 = document.getElementById("line3").getContext("2d");
 var line4 = document.getElementById("line4").getContext("2d");
 var line5 = document.getElementById("line5").getContext("2d");
-
-var circle1 = document.getElementById("circle1").getContext("2d");
-var circle2 = document.getElementById("circle2").getContext("2d");
-var circle3 = document.getElementById("circle3").getContext("2d");
-var circle4 = document.getElementById("circle4").getContext("2d");
-var circle5 = document.getElementById("circle5").getContext("2d");
 
 var drawLine = function(i, xCoord, yCoord) {
   var line;
@@ -48,10 +42,21 @@ var drawLine = function(i, xCoord, yCoord) {
   line.beginPath();
   line.moveTo(xCoord,yCoord);
   line.lineTo(300,300);
-  line.strokeStyle = '#455f72'; //dark blue
+  line.strokeStyle = '#1d2c38'; //dark blue
   line.lineWidth = 1;
   line.stroke();
 }
+
+
+
+//
+// Draw circles
+//
+var circle1 = document.getElementById("circle1").getContext("2d");
+var circle2 = document.getElementById("circle2").getContext("2d");
+var circle3 = document.getElementById("circle3").getContext("2d");
+var circle4 = document.getElementById("circle4").getContext("2d");
+var circle5 = document.getElementById("circle5").getContext("2d");
 
 var drawCircle = function(i, xCoord, yCoord) {
   var circle;
@@ -74,12 +79,9 @@ var drawCircle = function(i, xCoord, yCoord) {
       console.log(xCoord);console.log(yCoord);
   }
 
-  //
-  // Draw circles
-  //
   circle.beginPath();
   circle.arc(xCoord,yCoord,100,0,2*Math.PI);
-  circle.fillStyle = "#5e829b"; //medium blue
+  circle.fillStyle = "#557c99"; //medium blue
   circle.fill();
 }
 
@@ -87,7 +89,6 @@ var drawCircle = function(i, xCoord, yCoord) {
 //
 // Draw Limit
 //
-
 limit.beginPath();
 limit.moveTo(xCenter +  sideLen * Math.cos(rotation), yCenter +  sideLen *  Math.sin(rotation));
 
@@ -101,8 +102,8 @@ for(var i = 1; i <= sideNumb; i += 1) {
   drawLine(i, xCoord, yCoord);
 }
 
-limit.strokeStyle = '#455f72'; //dark blue
-limit.lineWidth = 1;
+limit.strokeStyle = '#1d2c38'; //dark blue
+limit.lineWidth = 3;
 limit.stroke();
 
 
@@ -116,8 +117,7 @@ sideNumb = 5,
 rotation = 60, // in radians
 persona = document.getElementById("persona").getContext("2d");
 
-// uncomment to enter rotation in degrees.
-// rotation *= Math.PI/180;
+
 
 var xCenter = width/2,
     yCenter = height/2;
@@ -141,35 +141,34 @@ persona.fill();
 
 
 //
-// Draw Progress
+// Draw rim
 //
 var height = 800,
 width = 800,
 sideLen = 300,
 sideNumb = 5,
 rotation = 60, // in radians
-progress = document.getElementById("progress").getContext("2d");
+rim = document.getElementById("rim").getContext("2d");
 
-// uncomment to enter rotation in degrees.
-// rotation *= Math.PI/180;
+
 
 var xCenter = width/2,
     yCenter = height/2;
 
-progress.beginPath();
-progress.moveTo(xCenter +  sideLen * Math.cos(rotation), yCenter +  sideLen *  Math.sin(rotation));
+rim.beginPath();
+rim.moveTo(xCenter +  sideLen * Math.cos(rotation), yCenter +  sideLen *  Math.sin(rotation));
 
 for(var i = 1; i <= sideNumb; i += 1) {
 
 var xCoord = xCenter +  sideLen * Math.cos(rotation + (i * 2 * Math.PI / sideNumb));
 var yCoord = yCenter +  sideLen *  Math.sin(rotation + (i * 2 * Math.PI / sideNumb));
 
-progress.lineTo(xCoord, yCoord);
+rim.lineTo(xCoord, yCoord);
 
 //Draw Circles
 drawCircle(i, xCoord, yCoord);
 }
 
-progress.strokeStyle = '#455f72'; //dark blue
-progress.lineWidth = 1;
-progress.stroke();
+rim.strokeStyle = '#557c99'; //dark blue
+rim.lineWidth = 3;
+rim.stroke();
