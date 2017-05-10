@@ -1,15 +1,3 @@
-var height = 600,
-width = 600,
-sideLen = 200,
-sideNumb = 5,
-rotation = 60, // in radians
-limit = document.getElementById("limit").getContext("2d");
-
-
-var xCenter = width/2, yCenter = height/2;
-
-
-
 //
 // Draw Lines
 //
@@ -86,89 +74,87 @@ var drawCircle = function(i, xCoord, yCoord) {
 }
 
 
+
 //
-// Draw Limit
+// Draw Pentagon
 //
-limit.beginPath();
-limit.moveTo(xCenter +  sideLen * Math.cos(rotation), yCenter +  sideLen *  Math.sin(rotation));
 
-for(var i = 1; i <= sideNumb; i += 1) {
+var drawPentagon = function(canvas, opts, callback) {
+  var rotation = 60; //in radians
+  var sideNum = 5;
+  var xCenter = (opts.width)/2;
+  var yCenter = (opts.height)/2;
 
-  var xCoord = xCenter +  sideLen * Math.cos(rotation + (i * 2 * Math.PI / sideNumb));
-  var yCoord = yCenter +  sideLen *  Math.sin(rotation + (i * 2 * Math.PI / sideNumb));
+  canvas.beginPath();
+  canvas.moveTo(xCenter +  opts.sideLen * Math.cos(rotation), yCenter +  opts.sideLen *  Math.sin(rotation));
 
-  limit.lineTo(xCoord, yCoord);
+  for(var i = 1; i <= sideNum; i += 1) {
+    var xCoord = xCenter +  opts.sideLen * Math.cos(rotation + (i * 2 * Math.PI / sideNum));
+    var yCoord = yCenter +  opts.sideLen *  Math.sin(rotation + (i * 2 * Math.PI / sideNum));
 
-  drawLine(i, xCoord, yCoord);
+    canvas.lineTo(xCoord, yCoord);
+
+    if(callback) {
+      callback(i, xCoord, yCoord);
+    }
+
+    // drawLine(i, xCoord, yCoord);
+  }
+
 }
 
-limit.strokeStyle = '#1d2c38'; //dark blue
-limit.lineWidth = 3;
-limit.stroke();
+
 
 
 //
-// Draw Persona
+// Limit Pentagon
 //
-var height = 600,
-width = 600,
-sideLen = 100,
-sideNumb = 5,
-rotation = 60, // in radians
-persona = document.getElementById("persona").getContext("2d");
-
-
-
-var xCenter = width/2,
-    yCenter = height/2;
-
-persona.beginPath();
-persona.moveTo(xCenter +  sideLen * Math.cos(rotation), yCenter +  sideLen *  Math.sin(rotation));
-
-for(var i = 1; i <= sideNumb; i += 1) {
-
-var xCoord = xCenter +  sideLen * Math.cos(rotation + (i * 2 * Math.PI / sideNumb));
-var yCoord = yCenter +  sideLen *  Math.sin(rotation + (i * 2 * Math.PI / sideNumb));
-
-persona.lineTo(xCoord, yCoord);
+var limitOpts = {
+  height: 600,
+  width: 600,
+  sideLen: 200
 }
 
-persona.fillStyle = "#2da4ff"; //light blue
-persona.fill();
+var limitCanvas = document.getElementById("limit").getContext("2d");
 
+drawPentagon(limitCanvas, limitOpts, drawLine);
 
+limitCanvas.strokeStyle = '#1d2c38'; //dark blue
+limitCanvas.lineWidth = 3;
+limitCanvas.stroke();
 
 
 
 //
-// Draw rim
+// Persona Pentagon
 //
-var height = 800,
-width = 800,
-sideLen = 300,
-sideNumb = 5,
-rotation = 60, // in radians
-rim = document.getElementById("rim").getContext("2d");
+var personaCanvas = document.getElementById("persona").getContext("2d");
 
-
-
-var xCenter = width/2,
-    yCenter = height/2;
-
-rim.beginPath();
-rim.moveTo(xCenter +  sideLen * Math.cos(rotation), yCenter +  sideLen *  Math.sin(rotation));
-
-for(var i = 1; i <= sideNumb; i += 1) {
-
-var xCoord = xCenter +  sideLen * Math.cos(rotation + (i * 2 * Math.PI / sideNumb));
-var yCoord = yCenter +  sideLen *  Math.sin(rotation + (i * 2 * Math.PI / sideNumb));
-
-rim.lineTo(xCoord, yCoord);
-
-//Draw Circles
-drawCircle(i, xCoord, yCoord);
+var personaOpts = {
+  height: 600,
+  width: 600,
+  sideLen: 100
 }
 
-rim.strokeStyle = '#557c99'; //dark blue
-rim.lineWidth = 3;
-rim.stroke();
+drawPentagon(personaCanvas, personaOpts);
+
+personaCanvas.fillStyle = "#2da4ff"; //light blue
+personaCanvas.fill();
+
+
+//
+// Rim Pentagon
+//
+var rimCanvas = document.getElementById("rim").getContext("2d");
+
+var rimOpts = {
+  height: 800,
+  width: 800,
+  sideLen: 300
+}
+
+drawPentagon(rimCanvas, rimOpts, drawCircle);
+
+rimCanvas.strokeStyle = '#557c99'; //medium blue
+rimCanvas.lineWidth = 3;
+rimCanvas.stroke();
